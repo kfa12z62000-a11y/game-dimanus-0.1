@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Система модов</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .mod-creator { max-width: 900px; margin: 20px auto; padding: 20px; }
+        textarea { width: 100%; height: 300px; background: #0a0a0a; color: #00ff00; border: 2px solid #00ff00; padding: 10px; font-family: monospace; }
+        .mod-list { margin-top: 30px; }
+        .mod-item { background: #16213e; padding: 15px; margin: 10px 0; border: 2px solid #00ff00; }
+    </style>
+</head>
+<body>
+    <div class="mod-creator">
+        <h1>Создание модов на JavaScript</h1>
+        <h3>Создать новый мод:</h3>
+        <input type="text" id="modName" placeholder="Название мода" style="width: 100%; padding: 10px; margin: 10px 0;">
+        <textarea id="modCode" placeholder="// Введите JavaScript код мода здесь
+// Пример: изменение скорости игрока
+game.player.speed = 10;
+
+// Пример: добавление нового оружия
+weapons.push({
+    id: 101,
+    name: 'Супер пушка',
+    damage: 999,
+    fireRate: 50,
+    ammo: 999,
+    type: 'custom'
+});"></textarea>
+        <button onclick="saveMod()" style="padding: 15px 30px; margin: 10px 5px;">Сохранить мод</button>
+        <button onclick="testMod()" style="padding: 15px 30px; margin: 10px 5px;">Тестировать</button>
+        
+        <div class="mod-list">
+            <h2>Установленные моды:</h2>
+            <div id="modsList"></div>
+        </div>
+    </div>
+    
+    <script src="../js/game-engine.js"></script>
+    <script src="../js/weapons.js"></script>
+    <script>
+        function saveMod() {
+            const name = document.getElementById('modName').value;
+            const code = document.getElementById('modCode').value;
+            
+            if (!name || !code) {
+                alert('Заполните название и код мода!');
+                return;
+            }
+            
+            let mods = JSON.parse(localStorage.getItem('gameMods') || '[]');
+            mods.push({ name, code, active: true, created: new Date().toISOString() });
+            localStorage.setItem('gameMods', JSON.stringify(mods));
+            
+            alert('Мод сохранён!');
+            loadMods();
+        }
+        
+        function testMod() {
+            const code = document.getElementById('modCode').value;
+            try {
+                eval(code);
+                alert('Мод работает! Проверьте консоль для результатов.');
+            } catch (e) {
+                alert('Ошибка в коде мода: ' + e.message);
+            }
+        }
+        
+        function loadMods() {
+            const mods = JSON.parse(localStorage.getItem('gameMods') || '[]');
+            const list = document.getElementById('modsList');
+            list.innerHTML = '';
+            
+            mods.forEach((mod, index) => {
+                list.innerHTML += `<div class="mod-item">
+                    <h3>${mod.name}</h3>
+                    <p>Создан: ${new Date(mod.created).toLocaleString()}</p>
+                    <button onclick="toggleMod(${index})">${mod.active ? 'Отключить' : 'Включить'}</button>
+                    <button onclick="deleteMod(${index})">Удалить</button>
+                </div>`;
+            });
+        }
+        
+        function toggleMod(index) {
+            let mods = JSON.parse(localStorage.getItem('gameMods') || '[]');
+            mods[index].active = !mods[index].active;
+            localStorage.setItem('gameMods', JSON.stringify(mods));
+            loadMods();
+        }
+        
+        function deleteMod(index) {
+            let mods = JSON.parse(localStorage.getItem('gameMods') || '[]');
+            mods.splice(index, 1);
+            localStorage.setItem('gameMods', JSON.stringify(mods));
+            loadMods();
+        }
+        
+        loadMods();
+    </script>
+</body>
+</html>

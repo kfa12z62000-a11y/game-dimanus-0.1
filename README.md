@@ -1,2 +1,57 @@
-# game-dimanus-0.1
-Dimanus 0.1 New Game By Yarik Studio Game shooter Yes Shooter cool - yes dimanus in russian language Download Please !
+# DIMANUS 0.1
+
+HTML5 игра-шутер с продвинутой графикой и системой модов.
+
+## Особенности:
+
+- 🎮 30 папок с различными игровыми системами
+- 🔫 100 уникальных видов оружия
+- 🎯 100 уникальных заданий
+- 🛠️ Система модов на JavaScript
+- 🎨 Графика в стиле Unreal Engine
+- 🌐 Полностью на HTML5/CSS3/JavaScript
+- 🎲 **3D режим на Three.js** - полноценная 3D графика с освещением, тенями и туманом
+- 🎮 **2D режим на Canvas** - классический вид сверху
+
+## Структура проекта:
+
+- `levels/` - Уровни игры
+- `weapons/` - Система оружия
+- `missions/` - Задания
+- `Mods/` - Система модов
+- `characters/` - Персонажи
+- `enemies/` - Враги
+- `maps/` - Карты
+- `graphics/` - Графические настройки
+- `audio/` - Звуки
+- `inventory/` - Инвентарь
+- `shop/` - Магазин
+- `achievements/` - Достижения
+- `multiplayer/` - Мультиплеер
+- `leaderboard/` - Таблица лидеров
+- `tutorial/` - Обучение
+- `bosses/` - Боссы
+- `vehicles/` - Транспорт
+- `powerups/` - Усиления
+- `cutscenes/` - Кат-сцены
+- `weather/` - Погода
+- `physics/` - Физика
+- `ai/` - Искусственный интеллект
+- `particles/` - Частицы
+- `lighting/` - Освещение
+- `animations/` - Анимации
+- `ui/` - Интерфейс
+- `saves/` - Сохранения
+- `settings/` - Настройки
+
+## Запуск:
+
+Откройте `index.html` в браузере.
+
+## Создание модов:
+
+1. Перейдите в раздел "Моды"
+2. Напишите JavaScript код
+3. Сохраните и активируйте мод
+
+Примеры модов смотрите в `Mods/README.md`

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Уровень 2 - Военная база</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        #gameCanvas { border: 3px solid #00ff00; box-shadow: 0 0 30px #00ff00; cursor: none; }
+        .game-info { color: #00ff00; margin-top: 20px; text-align: center; }
+        .back-btn { margin-top: 10px; padding: 10px 20px; background: #16213e; border: 2px solid #00ff00; color: #00ff00; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">Уровень 2: Военная база</h2>
+    <canvas id="gameCanvas"></canvas>
+    <div class="game-info">
+        <p>Управление: WASD - движение | Мышь - прицел | ЛКМ - стрельба</p>
+        <button class="back-btn" onclick="location.href='../index.html'">Выход в меню</button>
+    </div>
+    <script src="../js/game-engine.js"></script>
+    <script>game.init('gameCanvas'); game.gameLoop();</script>
+</body>
+</html>

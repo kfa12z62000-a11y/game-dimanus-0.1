@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>DIMANUS 0.1 - 3D Уровень 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: #00ff00;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+        #game-container { width: 100vw; height: 100vh; position: relative; }
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            font-size: 18px;
+            text-shadow: 0 0 10px #00ff00;
+            z-index: 100;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            text-align: center;
+            z-index: 100;
+        }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(22, 33, 62, 0.9);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background: rgba(15, 52, 96, 0.9);
+            box-shadow: 0 0 20px #00ff00;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            text-shadow: 0 0 20px #00ff00;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Загрузка 3D движка...</div>
+    <div id="game-container"></div>
+    <div id="hud">
+        <div>Здоровье: <span id="health">100</span></div>
+        <div>Счёт: <span id="score">0</span></div>
+        <div>Враги: <span id="enemies">0</span></div>
+    </div>
+    <div id="controls">
+        WASD - движение | Мышь - обзор (кликните для захвата) | ЛКМ - стрельба
+    </div>
+    <div id="crosshair" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; z-index: 50;">
+        <div style="position: absolute; width: 2px; height: 20px; background: #00ff00; left: 9px; box-shadow: 0 0 5px #00ff00;"></div>
+        <div style="position: absolute; width: 20px; height: 2px; background: #00ff00; top: 9px; box-shadow: 0 0 5px #00ff00;"></div>
+    </div>
+    <a href="../index.html" class="back-btn">Выход в меню</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../js/game-engine-3d.js"></script>
+    <script>
+        // Ждём загрузки Three.js
+        window.addEventListener('load', () => {
+            document.getElementById('loading').style.display = 'none';
+            
+            game3d.init('game-container');
+            game3d.gameLoop();
+
+            // Обновление HUD
+            setInterval(() => {
+                if (game3d.playerData) {
+                    document.getElementById('health').textContent = Math.max(0, game3d.playerData.health);
+                    document.getElementById('score').textContent = game3d.score;
+                    document.getElementById('enemies').textContent = game3d.enemies.length;
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

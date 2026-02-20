@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Арсенал оружия</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .weapons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; }
+        .weapon-card { background: #16213e; border: 2px solid #00ff00; padding: 15px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Арсенал - 100 видов оружия</h1>
+    <div id="weapons-list" class="weapons-grid"></div>
+    <script src="../js/weapons.js"></script>
+    <script>
+        const list = document.getElementById('weapons-list');
+        getAllWeapons().forEach(w => {
+            list.innerHTML += `<div class="weapon-card">
+                <h3>${w.name}</h3>
+                <p>Урон: ${w.damage}</p>
+                <p>Скорострельность: ${w.fireRate}ms</p>
+                <p>Патроны: ${w.ammo}</p>
+            </div>`;
+        });
+    </script>
+</body>
+</html>

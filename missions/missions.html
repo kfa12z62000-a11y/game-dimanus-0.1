@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задания</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .missions-list { padding: 20px; max-width: 800px; margin: 0 auto; }
+        .mission-item { background: #16213e; border-left: 4px solid #00ff00; padding: 15px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Задания - 100 миссий</h1>
+    <div id="missions-list" class="missions-list"></div>
+    <script src="../js/missions.js"></script>
+    <script>
+        const list = document.getElementById('missions-list');
+        getAllMissions().forEach(m => {
+            list.innerHTML += `<div class="mission-item">
+                <h3>${m.name}</h3>
+                <p>${m.description}</p>
+                <p>Награда: ${m.reward} монет</p>
+                <p>Статус: ${m.completed ? 'Выполнено' : 'Активно'}</p>
+            </div>`;
+        });
+    </script>
+</body>
+</html>
